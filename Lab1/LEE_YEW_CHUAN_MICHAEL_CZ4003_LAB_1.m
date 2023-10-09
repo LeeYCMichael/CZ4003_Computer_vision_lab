@@ -1,4 +1,6 @@
-%% 2.1 Contrast Stretching
+%% CZ4003-Lab 1 Codes: LEE YEW CHUAN MICHAEL
+
+%2.1 Contrast Stretching
 
 % 2.1.a Converting to Grayscale
 Pc = imread('mrt-train.jpg');
