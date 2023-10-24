@@ -17,12 +17,12 @@ sobel_hor = [-1 -2 -1;
             1  2  1];
 
 % vertical filtered img
-ver_filtered = conv2(P, sobel_ver);
+ver_filtered = conv2(P, sobel_ver); % apply vertical sobel
 imshow(uint8(ver_filtered));
 %imwrite(uint8(ver_filtered), 'macritchie_vertical_sobel.jpg');
 
 % horizontal filtered img
-hor_filtered = conv2(P, sobel_hor);
+hor_filtered = conv2(P, sobel_hor); % apply horizontal sobel
 imshow(uint8(hor_filtered));
 %imwrite(uint8(hor_filtered), 'macritchie_horizontal_sobel.jpg');
 
@@ -67,7 +67,7 @@ for t = 1:length(tl_list)
 end
 
 %% 3.2 Line finding using Hough Transform
-% 3.2.a Ruse the edge image coputed with canny algorithm
+% 3.2.a Ruse the edge image computed with canny algorithm
 tl = 0.04;
 th = 0.1;
 sigma = 1.0;
@@ -78,12 +78,13 @@ imshow(E);
 
 % 3.2.b use Radon transform
 [H, xp] = radon(E);
+figure;
 imagesc(uint8(H));
-colormap('default');
+colormap(gca,hot);
+axis off;
 
 % 3.2.c Find the peak
 [radius, theta] = find(H == max(H(:)));
-theta = theta - 1;
 
 % 3.2.d comvert theta radius line presentation to normal line form
 radius = xp(radius);
@@ -114,9 +115,13 @@ line([xl,xr], [yl,yr]);
 % 3.3.b Converting both images to grayscale
 Pl = imread("corridorl.jpg");
 Pl = rgb2gray(Pl);
+figure
+imshow(Pl);
 
 Pr = imread("corridorr.jpg");
 Pr = rgb2gray(Pr);
+figure
+imshow(Pr);
 
 % 3.3.c Run your algorithm on the two images
 D = disparity_map(Pl, Pr, 11, 11);
