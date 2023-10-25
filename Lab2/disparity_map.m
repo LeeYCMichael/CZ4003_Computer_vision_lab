@@ -1,8 +1,5 @@
 function map = disparity_map(imgl, imgr, dim1, dim2)
     
-imgl = double(imgl); % Convert imgs to double
-imgr = double(imgr);
-
 [height, width] = size(imgl); 
 max_range = 15;
 row = floor(dim1/2);
@@ -10,13 +7,13 @@ col = floor(dim2/2);
 
 map = ones(size(imgl));
 
-for i = 1+row:height
-    min_row = max(1, i - row);
-    max_row = min(height, i + row);
+for h = 1+row:height
+    min_row = max(1, h - row);
+    max_row = min(height, h + row);
 
-    for j = 1+col:width
-        min_col = max(1, j - col);
-        max_col = min(width, j + col);
+    for c = 1+col:width
+        min_col = max(1, c - col);
+        max_col = min(width, c + col);
         
         I = imgl(min_row:max_row, min_col:max_col);
 
@@ -37,6 +34,6 @@ for i = 1+row:height
                 min_diff = k - lower_bound + 1;
             end
         end
-        map(i, j) = min_diff + lower_bound - 1;
+        map(h, c) = min_diff + lower_bound - 1;
     end
 end

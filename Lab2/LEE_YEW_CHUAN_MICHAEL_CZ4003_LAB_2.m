@@ -81,7 +81,6 @@ imshow(E);
 figure;
 imagesc(uint8(H));
 colormap(gca,hot);
-axis off;
 
 % 3.2.c Find the peak
 [radius, theta] = find(H == max(H(:)));
@@ -124,7 +123,7 @@ figure
 imshow(Pr);
 
 % 3.3.c Run your algorithm on the two images
-D = disparity_map(Pl, Pr, 11, 11);
+D = disparity_map(double(Pl), double(Pr), 11, 11);
 figure
 imshow(-D,[-15 15]);
 
@@ -134,31 +133,6 @@ Tl = rgb2gray(Tl);
 Tr = imread("triclopsi2r.jpg");
 Tr = rgb2gray(Tr);
 
-D_triclops = disparity_map(Tl, Tr, 11, 11);
+D_triclops = disparity_map(double(Tl), double(Tr), 11, 11);
 figure
 imshow(-D_triclops,[-15 15]);
-%%
-
-Pl = imread("corridorl.jpg");
-Pl = rgb2gray(Pl);
-figure
-imshow(Pl);
-
-Pr = imread("corridorr.jpg");
-Pr = rgb2gray(Pr);
-figure
-imshow(Pr);
-
-% 3.3.c Run your algorithm on the two images
-D = test_map(Pl, Pr, 11, 11);
-figure
-imshow(D,[-15 15]);
-
-Tl = imread("triclopsi2l.jpg");
-Tl = rgb2gray(Tl);
-Tr = imread("triclopsi2r.jpg");
-Tr = rgb2gray(Tr);
-
-D_triclops = test_map(Tl, Tr, 11, 11);
-figure
-imshow(D_triclops,[-15 15]);
