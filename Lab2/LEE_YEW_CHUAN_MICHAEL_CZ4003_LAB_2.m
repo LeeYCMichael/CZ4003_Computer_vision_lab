@@ -86,7 +86,7 @@ axis off;
 % 3.2.c Find the peak
 [radius, theta] = find(H == max(H(:)));
 
-% 3.2.d comvert theta radius line presentation to normal line form
+% 3.2.d convert theta radius line presentation to normal line form
 radius = xp(radius);
 [A, B] = pol2cart(theta*pi/180, radius);
 B = -B; 
@@ -137,3 +137,28 @@ Tr = rgb2gray(Tr);
 D_triclops = disparity_map(Tl, Tr, 11, 11);
 figure
 imshow(-D_triclops,[-15 15]);
+%%
+
+Pl = imread("corridorl.jpg");
+Pl = rgb2gray(Pl);
+figure
+imshow(Pl);
+
+Pr = imread("corridorr.jpg");
+Pr = rgb2gray(Pr);
+figure
+imshow(Pr);
+
+% 3.3.c Run your algorithm on the two images
+D = test_map(Pl, Pr, 11, 11);
+figure
+imshow(D,[-15 15]);
+
+Tl = imread("triclopsi2l.jpg");
+Tl = rgb2gray(Tl);
+Tr = imread("triclopsi2r.jpg");
+Tr = rgb2gray(Tr);
+
+D_triclops = test_map(Tl, Tr, 11, 11);
+figure
+imshow(D_triclops,[-15 15]);
